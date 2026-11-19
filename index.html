@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+  <script src="https://web3forms.com/client/script.js" async defer></script>
 <body>
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="announcement"><span class="status-dot"></span> OPEN TO INTERNSHIPS & CREATIVE COLLABORATIONS <span class="announcement-star">✳</span></div>
@@ -181,6 +182,7 @@
           <label for="reason">WHAT'S THIS ABOUT?</label><select id="reason" name="reason" required><option value="" disabled selected>Choose a reason</option><option>Internship / opportunity</option><option>Creative collaboration</option><option>Project / idea</option><option>Just saying hello</option><option>Something else</option></select>
           <label for="message">YOUR MESSAGE</label><textarea id="message" name="message" rows="4" placeholder="Tell me a little about it..." required></textarea>
           <input type="text" name="website" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Leave this field empty">
+          <div class="h-captcha" data-captcha="true"></div>
           <button class="send-button" type="submit">SEND IT MY WAY <span>↗</span></button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
