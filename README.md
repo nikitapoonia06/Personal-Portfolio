@@ -1,6 +1,6 @@
 # Nikita Poonia
 
-*Personal portfolio · a work in progress, in the nicest possible way.*
+*Personal portfolio*
 
 Most stories begin with a plan. Mine often begin with a question, a dozen open tabs, and the slightly unreasonable belief that I can probably figure it out.
 
@@ -28,16 +28,9 @@ A quiz application built with Java and Spring Boot, and another step in getting 
 
 Artificial intelligence, data, software development, cybersecurity, and the creative side of making things. My interests have never been particularly good at standing in a neat queue, so this section may grow as I do.
 
-## A few plot points
-
-- **B.Tech in Artificial Intelligence and Data Science** — Arya College of Engineering and IT, Jaipur (2024–2028).
-- **TryHackMe** — among the top 4% globally.
-- **Education** — 98% in Class X and 90% in Class XII.
-- **Hackathons** — Geo-spatial Hackathon and Women Who Master Hackathon.
-
 ## The page between the chapters
 
-I write poetry sometimes. No grand explanation for it; some thoughts simply behave better when they're given a few lines and a little space. You'll find a small creative corner on the portfolio for that side of me, too.
+I write poetry sometimes. No grand explanation for it; some thoughts simply behave better when they're given a few lines and a little space. You'll find a small creative corner on the portfolio for that side of me, too. However, no poems are listed there yet since my full focus is currently on publishing my poetry book.
 
 ## Say hello
 
