@@ -174,7 +174,8 @@
       <h2>Have something<br>in <em>mind?</em></h2>
       <div class="contact-layout">
         <div class="contact-intro"><p>Opportunities, collaborations, interesting projects or just a thoughtful conversation — my inbox is open.</p><div class="social-links"><a href="https://www.linkedin.com/in/nikita-poonia-937293352/" target="_blank" rel="noopener noreferrer">LINKEDIN <span>↗</span></a><a href="https://github.com/nikitapoonia06" target="_blank" rel="noopener noreferrer">GITHUB <span>↗</span></a></div></div>
-        <form class="contact-form" action="https://YOUR-WORKER.your-subdomain.workers.dev/api/contact" method="POST" novalidate>
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="00122538-8e50-4643-9257-2e8afc7031a2">
           <label for="name">YOUR NAME</label><input id="name" name="name" type="text" placeholder="What should I call you?" required>
           <label for="email">YOUR EMAIL</label><input id="email" name="email" type="email" placeholder="Where can I reach you?" required>
           <label for="reason">WHAT'S THIS ABOUT?</label><select id="reason" name="reason" required><option value="" disabled selected>Choose a reason</option><option>Internship / opportunity</option><option>Creative collaboration</option><option>Project / idea</option><option>Just saying hello</option><option>Something else</option></select>
