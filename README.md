@@ -1,6 +1,6 @@
 # Nikita Poonia
 
-*Personal portfolio*
+*Personal portfolio: https://nikitapoonia06.github.io/Personal-Portfolio/*
 
 Most stories begin with a plan. Mine often begin with a question, a dozen open tabs, and the slightly unreasonable belief that I can probably figure it out.
 
