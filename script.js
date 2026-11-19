@@ -1,3 +1,4 @@
+
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.site-header nav');
 menuButton?.addEventListener('click', () => {
@@ -29,9 +30,8 @@ if (window.matchMedia('(pointer:fine)').matches && !window.matchMedia('(prefers-
     });
     card.addEventListener('pointerleave', () => card.style.transform = '');
   });
-}
+});
 
-// Contact delivery is handled by a Cloudflare Worker. The Web3Forms key stays server-side.
 const form = document.querySelector('.contact-form');
 if (form) {
   const status = form.querySelector('.form-status');
@@ -49,7 +49,6 @@ if (form) {
     event.preventDefault();
     setStatus('', '');
 
-    // Native browser checks plus conservative length and format checks.
     if (!form.reportValidity()) return;
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
@@ -77,51 +76,76 @@ if (form) {
       return;
     }
 
+    const lastSubmission = localStorage.getItem('portfolio_last_submission');
+
+    if (
+      lastSubmission &&
+      Number.isFinite(Number(lastSubmission)) &&
+      Date.now() - Number(lastSubmission) < 86400000
+    ) {
+      setStatus('You can send another message after 24 hours.', 'error');
+      return;
+    }
+
+    const captchaResponse = form.querySelector(
+      'textarea[name="h-captcha-response"]'
+    )?.value;
+
+    if (!captchaResponse) {
+      setStatus('Please complete the CAPTCHA before sending.', 'error');
+      return;
+    }
+
     submitButton.disabled = true;
     submitButton.setAttribute('aria-busy', 'true');
     const originalButton = submitButton.innerHTML;
     submitButton.textContent = 'SENDING…';
 
-    
-try {
-  const response = await fetch(form.action, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-      access_key: form.elements.access_key.value,
-      name,
-      email,
-      reason,
-      message,
-      website: form.elements.website.value
-    })
-  });
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: form.elements.access_key.value,
+          name,
+          email,
+          reason,
+          message,
+          website: form.elements.website.value,
+          'h-captcha-response': captchaResponse
+        })
+      });
 
-  const result = await response.json().catch(() => ({}));
+      const result = await response.json().catch(() => ({}));
 
-  if (!response.ok || result.success !== true) {
-    throw new Error(
-      result.message || 'Message could not be sent. Please try again.'
-    );
-  }
+      if (!response.ok || result.success !== true) {
+        throw new Error(
+          result.message || 'Message could not be sent. Please try again.'
+        );
+      }
 
-  form.reset();
-  setStatus('Message sent!', 'success');
+      localStorage.setItem(
+        'portfolio_last_submission',
+        Date.now().toString()
+      );
 
-} catch (error) {
-  setStatus(
-    error.message || 'Something went wrong. Please try again later.',
-    'error'
-  );
+      form.reset();
+      setStatus('Message sent!', 'success');
 
-} finally {
-  submitButton.disabled = false;
-  submitButton.removeAttribute('aria-busy');
-  submitButton.innerHTML = originalButton;
-}
+    } catch (error) {
+      setStatus(
+        error.message || 'Something went wrong. Please try again later.',
+        'error'
+      );
+
+    } finally {
+      submitButton.disabled = false;
+      submitButton.removeAttribute('aria-busy');
+      submitButton.innerHTML = originalButton;
+    }
 
   });
 }
