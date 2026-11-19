@@ -82,24 +82,46 @@ if (form) {
     const originalButton = submitButton.innerHTML;
     submitButton.textContent = 'SENDING…';
 
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, email, reason, message, website: form.elements.website.value })
-      });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || result.success !== true) {
-        throw new Error(result.message || 'Message could not be sent. Please try again.');
-      }
-      form.reset();
-      setStatus('Message sent!', 'success');
-    } catch (error) {
-      setStatus(error.message || 'Something went wrong. Please try again later.', 'error');
-    } finally {
-      submitButton.disabled = false;
-      submitButton.removeAttribute('aria-busy');
-      submitButton.innerHTML = originalButton;
-    }
+    
+try {
+  const response = await fetch(form.action, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      access_key: form.elements.access_key.value,
+      name,
+      email,
+      reason,
+      message,
+      website: form.elements.website.value
+    })
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok || result.success !== true) {
+    throw new Error(
+      result.message || 'Message could not be sent. Please try again.'
+    );
+  }
+
+  form.reset();
+  setStatus('Message sent!', 'success');
+
+} catch (error) {
+  setStatus(
+    error.message || 'Something went wrong. Please try again later.',
+    'error'
+  );
+
+} finally {
+  submitButton.disabled = false;
+  submitButton.removeAttribute('aria-busy');
+  submitButton.innerHTML = originalButton;
+}
+
   });
 }
